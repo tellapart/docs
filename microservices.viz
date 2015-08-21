@@ -1,0 +1,117 @@
+# GraphViz definition for TellApart's microservices platform.
+# You can copy/paste this into something like http://www.webgraphviz.com/ to get an image.
+
+digraph G {
+  "Cheap compute" [ fillcolor = lightblue, style=filled ]
+  "Fast iterations" [fillcolor = lightblue, style=filled]
+  "Security" [fillcolor = lightblue, style=filled]
+  "Stability" [fillcolor = lightblue, style=filled]
+  "Make money" [fillcolor = lightgreen, style=filled]
+  "Debugability" [fillcolor = orange, style=filled]
+  "Monitoring" [fillcolor = orange, style=filled]
+  "Logs" [fillcolor = orange, style=filled]
+  "Local development" [fillcolor = orange, style=filled]
+  "Devel environment" [fillcolor = orange, style=filled]
+  "Fast deploy" [fillcolor = orange, style=filled]
+  "AWS" [fillcolor = deeppink, style=filled]
+  "Docker" [fillcolor = deeppink, style=filled]
+  "Service Discovery" [fillcolor = deeppink, style=filled]
+  "Aurora" [fillcolor = deeppink, style=filled]
+  "Mesos" [fillcolor = deeppink, style=filled]
+  "Librato" [fillcolor = deeppink, style=filled]
+  "Python" [fillcolor = deeppink, style=filled]
+  "Java" [fillcolor = deeppink, style=filled]
+  "Finagle" [fillcolor = deeppink, style=filled]
+  "Cloud storage" [fillcolor = deeppink, style=filled]
+  "Key distribution" [fillcolor = deeppink, style=filled]
+  "TwitterServer" [fillcolor = deeppink, style=filled]
+  "Scheduler" [fillcolor = deeppink, style=filled]
+  "Spot instances" [fillcolor = deeppink, style=filled]
+  "Machine autoscaler" [fillcolor = gold3, style=filled]
+  "Job autoscaler" [fillcolor = gold3, style=filled]
+  "TellApartServer" [fillcolor = gold3, style=filled]
+  "/load" [fillcolor = gold3, style=filled]
+  "/flagz" [fillcolor = gold3, style=filled]
+  "/health" [fillcolor = gold3, style=filled]
+  "Flags" [fillcolor = gold3, style=filled]
+  "Load balancer" [fillcolor = gold3, style=filled]
+  "/rpcz" [fillcolor = gold3, style=filled]
+  "/varz" [fillcolor = gold3, style=filled]
+  "Loadtest" [fillcolor = gold3, style=filled]
+  "Autopush" [fillcolor = gold3, style=filled]
+  "Mesos" -> "Aurora"
+  "Aurora" -> "Service Discovery"
+  "Aurora" -> "Fast deploy"
+  "Aurora" -> "Scheduler"
+  "Service Discovery" -> "Load balancer"
+  "Load balancer" -> "Stability"
+  "/load" -> "Load balancer"
+  "/load" -> "Job autoscaler"
+  "Fast deploy" -> "Job autoscaler"
+  "Job autoscaler" -> "Machine autoscaler"
+  "Scheduler" -> "Machine autoscaler"
+  "TellApartServer" -> "/load"
+  "TellApartServer" -> "/rpcz"
+  "TellApartServer" -> "/health"
+  "Service Discovery" -> "/rpcz"
+  "Finagle" -> "/rpcz"
+  "Aurora" -> "Logs"
+  "Finagle" -> "Loadtest"
+  "Service Discovery" -> "Loadtest"
+  "TellApartServer" -> "Binary Logs"
+  "Binary Logs" -> "Loadtest"
+  "Finagle" -> "Binary Logs"
+  "Cloud storage" -> "Binary Logs"
+  "Librato" -> "Monitoring"
+  "TellApartServer" -> "Monitoring"
+  "Finagle" -> "Monitoring"
+  "Mesos" -> "Monitoring"
+  "Aurora" -> "Monitoring"
+  "TellApartServer" -> "/varz"
+  "Librato" -> "/varz"
+  "Docker" -> "Fast deploy"
+  "Docker" -> "Local development"
+  "Aurora" -> "Flags"
+  "Flags" -> "/flagz"
+  "TellApartServer" -> "/flagz"
+  "Service Discovery" -> "Devel environment"
+  "Aurora" -> "Devel environment"
+  "Flags" -> "Devel environment"
+  "Devel environment" -> "Autopush"
+  "Loadtest" -> "Autopush"
+  "Key distribution" -> "Authentication"
+  "Finagle" -> "Authentication"
+  "Authentication" -> "Authorization"
+  "TellApartServer" -> "Authorization"
+  "Monitoring" -> "Autopush"
+  "/health" -> "Autopush"
+  "Logs" -> "Debugability"
+  "Local development" -> "Debugability"
+  "/rpcz" ->"Debugability"
+  "/health" -> "Debugability"
+  "Key distribution" -> "Encryption"
+  "Finagle" -> "Encryption"
+  "Encryption" -> "Security"
+  "Authorization" -> "Security"
+  "Authorization" -> "Loadtest"
+  "Machine autoscaler" -> "Cheap compute"
+  "Scheduler" -> "Cheap compute"
+  "Encryption" -> "Loadtest"
+  "Devel environment" -> "Fast iterations"
+  "Autopush" -> "Fast iterations"
+  "Debugability" -> "Fast iterations"
+  "Monitoring" -> "Stability"
+  "Fast deploy" -> "Stability"
+  "/flagz" -> "Debugability"
+ 
+  "AWS" -> "Machine autoscaler"
+  "AWS" -> "Spot instances"
+  "Spot instances" -> "Cheap compute"
+  "TwitterServer" -> "TellApartServer"
+  "Java" -> "TwitterServer"
+  "Python" -> "TellApartServer"
+  "Stability" -> "Make money"
+  "Fast iterations" -> "Make money"
+  "Cheap compute" -> "Make money"
+  "Security" -> "Make money"
+}
